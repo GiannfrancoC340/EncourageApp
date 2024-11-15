@@ -9,11 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 20) {
+            // Title
+            Text("Encourage App")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.top)
+            
+            Spacer()
+            
+            // Footer
+            Text("Created by: Giannfranco Crovetto")
+                .font(.footnote)
+                .padding()
         }
         .padding()
     }
