@@ -9,7 +9,22 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 20) {
+                // Sections
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("App Version")
+                        .font(.headline)
+                    Text("1.0.0")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                }
+//               .padding()
+            }
+            .padding()
+            .padding(.bottom, 48) // Extra padding for the tab bar controller
+            .navigationTitle("Settings") // Navigation Title
+        }
     }
 }
 
