@@ -19,7 +19,7 @@ struct EncourageAppApp: App {
     var body: some Scene {
         WindowGroup {
             if authManager.isSignedIn {
-                ContentView()
+                MainTabView()
                     .environmentObject(authManager) // Pass as EnvironmentObject
             } else {
                 LoginView()
