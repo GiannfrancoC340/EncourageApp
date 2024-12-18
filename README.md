@@ -51,6 +51,7 @@ Encourage is an app that displays a random positive message of encouragement for
 * Everytime the user creates a new account, it will be tracked in the database.
 * There will be a Settings Button/Tab.
 * The user can see all important settings here.
+* The app will have an easy to use UI to navigate the app. Such as dropdowns and search functionality.
 
 **Optional Nice-to-have Stories**
 
