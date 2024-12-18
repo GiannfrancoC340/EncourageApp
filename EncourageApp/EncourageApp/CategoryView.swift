@@ -9,8 +9,13 @@ import SwiftUI
 
 struct CategoryView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Text("Do")
+        VStack {
+            Text("Congrats! You made it to this file!")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+        }
+        .navigationTitle("Category View")
     }
 }
 
