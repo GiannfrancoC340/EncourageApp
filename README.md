@@ -115,7 +115,9 @@ Encourage is an app that displays a random positive message of encouragement for
 
 ## Wireframes
 
-[Add picture of your hand sketched wireframes in this section]
+![IMG_2639](https://github.com/user-attachments/assets/49462e71-135d-4f04-8bb6-77b93a7f5fd1)
+
+![IMG_2640](https://github.com/user-attachments/assets/6769afe2-3361-4038-92fe-f547097184a5)
 
 ### [BONUS] Digital Wireframes & Mockups
 
