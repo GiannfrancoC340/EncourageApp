@@ -18,6 +18,8 @@ struct ContentView: View {
             
             Spacer()
             
+            Text("Hello there")
+            
             // Footer
             Text("Created by: Giannfranco Crovetto")
                 .font(.footnote)
