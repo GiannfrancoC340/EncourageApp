@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AB72C1C2D1366160024BD92 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB72C1B2D1366160024BD92 /* CategoryView.swift */; };
 		4ABC7E4A2D125DF700BACA2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ABC7E492D125DF700BACA2A /* GoogleService-Info.plist */; };
 		4ABC7E582D125E7500BACA2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4ABC7E572D125E7500BACA2A /* FirebaseAuth */; };
 		4ABC7E5A2D125E7B00BACA2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4ABC7E592D125E7B00BACA2A /* FirebaseFirestore */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4AB72C1B2D1366160024BD92 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		4ABC7E492D125DF700BACA2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4ABC7E5D2D12609300BACA2A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				4ABC7E612D12638F00BACA2A /* MainTabView.swift */,
 				4ABC7E5D2D12609300BACA2A /* LoginView.swift */,
 				4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */,
+				4AB72C1B2D1366160024BD92 /* CategoryView.swift */,
 				4ABC7E5F2D12618500BACA2A /* ProfileView.swift */,
 				4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */,
 				4AE3E9A02CE6DCB800952AA8 /* Assets.xcassets */,
@@ -173,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE3E99F2CE6DCB700952AA8 /* ContentView.swift in Sources */,
+				4AB72C1C2D1366160024BD92 /* CategoryView.swift in Sources */,
 				4ABC7E5C2D125FE500BACA2A /* AuthManager.swift in Sources */,
 				4ABC7E602D12618500BACA2A /* ProfileView.swift in Sources */,
 				4ABC7E5E2D12609300BACA2A /* LoginView.swift in Sources */,
