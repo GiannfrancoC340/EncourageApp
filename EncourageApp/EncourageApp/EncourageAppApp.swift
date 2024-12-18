@@ -22,7 +22,7 @@ struct EncourageAppApp: App {
                 ContentView()
                     .environmentObject(authManager) // Pass as EnvironmentObject
             } else {
-                ContentView()
+                LoginView()
                     .environmentObject(authManager) // Pass as EnvironmentObject
             }
         }
