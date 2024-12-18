@@ -8,11 +8,74 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @State private var selectedTab: Tab = .contentView
+    @EnvironmentObject var authManager: AuthManager // allows AuthManager access
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            // Content Area
+            Group {
+                // All the tabs on the controller
+                switch selectedTab {
+                case .contentView:
+                    ContentView()
+                case .profileView:
+                    ProfileView()
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            // Custom Tab Bar
+            VStack {
+                Spacer()
+                HStack(spacing: 0) {
+                    ForEach(Tab.allCases, id: \.self) { tab in
+                        Button(action: {
+                            selectedTab = tab
+                        }) {
+                            VStack {
+                                Image(systemName: tab.icon)
+                                    .font(.system(size: 24))
+                                Text(tab.title)
+                                    .font(.caption)
+                            }
+                            .foregroundColor(selectedTab == tab ? .blue : .gray)
+                            .frame(maxWidth: .infinity)
+                            //.frame(width: 66) // Set a fixed width for all tabs
+                            .padding()
+                            .background(selectedTab == tab ? Color(UIColor.systemGray6) : Color.clear)
+                        }
+                    }
+                }
+                .background(Color.white)
+            }
+        }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
+enum Tab: CaseIterable {
+    case contentView, profileView
+    
+    var icon: String {
+        // Tab icon
+        switch self {
+        case .contentView: return "house"
+        case .profileView: return "person"
+        }
+    }
+    
+    var title: String {
+        // Tab name at the bottom
+        switch self {
+        case .contentView: return "Home"
+        case .profileView: return "Profile"
+        }
+    }
+}
+
+
 #Preview {
     MainTabView()
+        .environmentObject(AuthManager(isMocked: true)) // Mocked for preview
 }
