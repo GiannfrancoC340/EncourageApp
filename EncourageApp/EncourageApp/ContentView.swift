@@ -31,4 +31,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AuthManager()) // Pass an instance of AuthManager for preview
 }

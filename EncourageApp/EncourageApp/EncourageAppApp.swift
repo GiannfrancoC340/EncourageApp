@@ -18,7 +18,7 @@ struct EncourageAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if authManager.user != nil {
+            if authManager.isSignedIn {
                 ContentView()
                     .environmentObject(authManager) // Pass as EnvironmentObject
             } else {

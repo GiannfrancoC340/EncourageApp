@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 
 class AuthManager: ObservableObject {
+    @Published var signedInUserEmail: String? // Tracks signed-in user's email
     @Published var user: User?
     var isMocked: Bool = false
     var isSignedIn: Bool { user != nil }
@@ -18,6 +19,13 @@ class AuthManager: ObservableObject {
 
     init(isMocked: Bool = false) {
         self.isMocked = isMocked
+        
+        // Set the initial user from Firebase's currentUser
+        if !isMocked {
+            self.user = Auth.auth().currentUser
+        }
+        
+        // Listen for authentication state changes
         handle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async { // Ensure UI updates happen on the main thread
                 self?.user = user
@@ -42,6 +50,7 @@ class AuthManager: ObservableObject {
                 print(error)
             }
         }
+        signedInUserEmail = email
     }
 
     func signIn(email: String, password: String) {
@@ -55,6 +64,7 @@ class AuthManager: ObservableObject {
                 print(error)
             }
         }
+        signedInUserEmail = email
     }
 
     func signOut() {
@@ -65,6 +75,17 @@ class AuthManager: ObservableObject {
             }
         } catch {
             print(error)
+        }
+        signedInUserEmail = nil
+    }
+    
+    func resetPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
         }
     }
 }
