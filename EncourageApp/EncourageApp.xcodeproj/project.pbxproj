@@ -10,6 +10,7 @@
 		4ABC7E4A2D125DF700BACA2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ABC7E492D125DF700BACA2A /* GoogleService-Info.plist */; };
 		4ABC7E582D125E7500BACA2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4ABC7E572D125E7500BACA2A /* FirebaseAuth */; };
 		4ABC7E5A2D125E7B00BACA2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4ABC7E592D125E7B00BACA2A /* FirebaseFirestore */; };
+		4ABC7E5C2D125FE500BACA2A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */; };
 		4AE3E99D2CE6DCB700952AA8 /* EncourageAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3E99C2CE6DCB700952AA8 /* EncourageAppApp.swift */; };
 		4AE3E99F2CE6DCB700952AA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */; };
 		4AE3E9A12CE6DCB800952AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3E9A02CE6DCB800952AA8 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		4ABC7E492D125DF700BACA2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		4AE3E9992CE6DCB700952AA8 /* EncourageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EncourageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE3E99C2CE6DCB700952AA8 /* EncourageAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncourageAppApp.swift; sourceTree = "<group>"; };
 		4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			children = (
 				4AE3E99C2CE6DCB700952AA8 /* EncourageAppApp.swift */,
 				4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */,
+				4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */,
 				4AE3E9A02CE6DCB800952AA8 /* Assets.xcassets */,
 				4ABC7E492D125DF700BACA2A /* GoogleService-Info.plist */,
 				4AE3E9A22CE6DCB800952AA8 /* Preview Content */,
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE3E99F2CE6DCB700952AA8 /* ContentView.swift in Sources */,
+				4ABC7E5C2D125FE500BACA2A /* AuthManager.swift in Sources */,
 				4AE3E99D2CE6DCB700952AA8 /* EncourageAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

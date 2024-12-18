@@ -10,13 +10,21 @@ import FirebaseCore // <-- Import Firebase
 
 @main
 struct EncourageAppApp: App {
+    @StateObject private var authManager = AuthManager() // Use @StateObject for AuthManager
+    
     init() { // <-- Add an init
         FirebaseApp.configure() // <-- Configure Firebase app
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authManager.user != nil {
+                ContentView()
+                    .environmentObject(authManager) // Pass as EnvironmentObject
+            } else {
+                ContentView()
+                    .environmentObject(authManager) // Pass as EnvironmentObject
+            }
         }
     }
 }
