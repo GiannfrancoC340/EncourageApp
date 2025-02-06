@@ -25,7 +25,7 @@ struct ContentView: View {
                     // Rounded rectangles
                     VStack(spacing: 14) {
                         // Category 1
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Self Motivation")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -39,7 +39,7 @@ struct ContentView: View {
                         }
                         
                         // Category 2
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Mindfulness")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -53,7 +53,7 @@ struct ContentView: View {
                         }
                         
                         // Category 3
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Anxiety")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -67,7 +67,7 @@ struct ContentView: View {
                         }
                         
                         // Category 4
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Depression")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -81,7 +81,7 @@ struct ContentView: View {
                         }
                         
                         // Category 5
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Uplifting")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -95,7 +95,7 @@ struct ContentView: View {
                         }
                         
                         // Category 6
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Stage Fright")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
@@ -109,7 +109,7 @@ struct ContentView: View {
                         }
                         
                         // Category 7
-                        NavigationLink(destination: CategoryView()) {
+                        NavigationLink(destination: CategoryView(categoryName: "Mindfulness")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
