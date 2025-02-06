@@ -81,14 +81,14 @@ struct ContentView: View {
                         }
                         
                         // Category 5
-                        NavigationLink(destination: CategoryView(categoryName: "Uplifting")) {
+                        NavigationLink(destination: CategoryView(categoryName: "Overthinking")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5) // Creates a shadow underlay
                                     .frame(width: 350, height: 100) // Adjust the width and height
                                     .padding(.horizontal)
-                                Text("Uplifting")
+                                Text("Overthinking")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
