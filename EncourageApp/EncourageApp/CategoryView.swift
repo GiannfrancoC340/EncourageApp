@@ -85,7 +85,7 @@ struct CategoryView: View {
 
             // Message Display Box
             Text(generatedMessage)
-                .frame(width: 300, height: 100)
+                .frame(width: 300, height: 190)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
