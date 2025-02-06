@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryView: View {
     var categoryName: String // Pass the category name
     @State private var generatedMessage: String = "Tap 'Generate' to get a message!"
+    @State private var rating: String? = nil // Track rating ("up", "down", or nil)
 
     // Sample messages for different categories
     let messages: [String: [String]] = [
@@ -91,6 +92,23 @@ struct CategoryView: View {
                 .cornerRadius(10)
                 .shadow(radius: 3)
                 .multilineTextAlignment(.center)
+            
+            // Rating Buttons (Thumbs Up & Thumbs Down)
+            HStack {
+                Button(action: { rating = "up" }) {
+                    Image(systemName: "hand.thumbsup.fill")
+                        .foregroundColor(rating == "up" ? .green : .gray)
+                        .font(.largeTitle)
+                }
+                .padding()
+
+                Button(action: { rating = "down" }) {
+                    Image(systemName: "hand.thumbsdown.fill")
+                        .foregroundColor(rating == "down" ? .red : .gray)
+                        .font(.largeTitle)
+                }
+                .padding()
+            }
         }
         .padding()
         .navigationTitle("Category View")
@@ -103,6 +121,7 @@ struct CategoryView: View {
         } else {
             generatedMessage = "No messages found for this category."
         }
+        rating = nil // Reset rating when a new message is generated
     }
 }
 
