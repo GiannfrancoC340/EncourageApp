@@ -25,14 +25,14 @@ struct ContentView: View {
                     // Rounded rectangles
                     VStack(spacing: 14) {
                         // Category 1
-                        NavigationLink(destination: CategoryView(categoryName: "Self Motivation")) {
+                        NavigationLink(destination: CategoryView(categoryName: "Motivation")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5) // Creates a shadow underlay
                                     .frame(width: 350, height: 100) // Adjust the width and height
                                     .padding(.horizontal)
-                                Text("Self Motivation")
+                                Text("Motivation")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
@@ -95,28 +95,28 @@ struct ContentView: View {
                         }
                         
                         // Category 6
-                        NavigationLink(destination: CategoryView(categoryName: "Stage Fright")) {
+                        NavigationLink(destination: CategoryView(categoryName: "Wellness")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5) // Creates a shadow underlay
                                     .frame(width: 350, height: 100) // Adjust the width and height
                                     .padding(.horizontal)
-                                Text("Stage Fright")
+                                Text("Wellness")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
                         }
                         
                         // Category 7
-                        NavigationLink(destination: CategoryView(categoryName: "Mindfulness")) {
+                        NavigationLink(destination: CategoryView(categoryName: "Inspiration")) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.systemGray6)) // Light gray background
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5) // Creates a shadow underlay
                                     .frame(width: 350, height: 100) // Adjust the width and height
                                     .padding(.horizontal)
-                                Text("Mindfulness")
+                                Text("Inspiration")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
