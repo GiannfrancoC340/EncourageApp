@@ -11,7 +11,7 @@ struct CategoryView: View {
     var categoryName: String // Pass the category name
     @State private var generatedMessage: String = "Tap 'Generate' to get a message!"
     @State private var rating: String? = nil // Track rating ("up", "down", or nil)
-
+    
     // Sample messages for different categories
     let messages: [String: [String]] = [
         "Motivation": [
@@ -71,7 +71,7 @@ struct CategoryView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()
-
+            
             // Generate Button
             Button(action: generateMessage) {
                 Text("Generate")
@@ -83,7 +83,7 @@ struct CategoryView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
-
+            
             // Message Display Box
             Text(generatedMessage)
                 .frame(width: 300, height: 190)
@@ -93,25 +93,31 @@ struct CategoryView: View {
                 .shadow(radius: 3)
                 .multilineTextAlignment(.center)
             
-            // Rating Buttons (Thumbs Up & Thumbs Down)
-            HStack {
-                Button(action: { rating = "up" }) {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .foregroundColor(rating == "up" ? .green : .gray)
-                        .font(.largeTitle)
-                }
-                .padding()
+            VStack(spacing: 4) {
+                Text("Rate?")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding()
 
-                Button(action: { rating = "down" }) {
-                    Image(systemName: "hand.thumbsdown.fill")
-                        .foregroundColor(rating == "down" ? .red : .gray)
-                        .font(.largeTitle)
+                // Rating Buttons (Thumbs Up & Thumbs Down)
+                HStack(spacing: 30) { // Controls spacing between buttons
+                    Button(action: { rating = "up" }) {
+                        Image(systemName: "hand.thumbsup.fill")
+                            .foregroundColor(rating == "up" ? .green : .gray)
+                            .font(.largeTitle)
+                    }
+                    //.padding()
+
+                    Button(action: { rating = "down" }) {
+                        Image(systemName: "hand.thumbsdown.fill")
+                            .foregroundColor(rating == "down" ? .red : .gray)
+                            .font(.largeTitle)
+                    }
+                    //.padding()
                 }
-                .padding()
             }
         }
         .padding()
-        .navigationTitle("Category View")
     }
     
     // Function to generate a random message
