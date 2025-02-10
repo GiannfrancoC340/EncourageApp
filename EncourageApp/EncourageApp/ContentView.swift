@@ -14,8 +14,13 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 20) {
                 // Title
-                Text("Encourage App")
+                Text("Welcome to Encourage!")
                     .font(.largeTitle)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.bold)
+                    .padding(.top)
+                Text("Categories:")
+                    .font(.title2)
                     .multilineTextAlignment(.center)
                     .fontWeight(.bold)
                     .padding(.top)
