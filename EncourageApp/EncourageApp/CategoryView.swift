@@ -11,6 +11,7 @@ struct CategoryView: View {
     var categoryName: String // Pass the category name
     @State private var generatedMessage: String = "Tap 'Generate' to get a message!"
     @State private var rating: String? = nil // Track rating ("up", "down", or nil)
+    @State private var timeRemaining: String = "24:00" // Time until reset
     
     // Sample messages for different categories
     let messages: [String: [String]] = [
@@ -116,21 +117,79 @@ struct CategoryView: View {
                     //.padding()
                 }
             }
+            
+            // Display countdown timer
+            Text("Next reset in: \(timeRemaining)")
+                .font(.headline)
+                .foregroundColor(.gray)
+                .padding(.top, 10)
         }
         .padding()
+        .onAppear(perform: updateCountdown)
     }
     
-    // Function to generate a random message
+    // Function to generate a message that hasn't been used in the last 24 hours
     func generateMessage() {
-        if let categoryMessages = messages[categoryName] {
-            generatedMessage = categoryMessages.randomElement() ?? "No messages available."
+        var usedMessages = getStoredMessages()
+        let currentTime = Date().timeIntervalSince1970
+        let expirationTime = 86400.0 // 24 hours in seconds
+
+        // Remove expired messages
+        usedMessages = usedMessages.filter { currentTime - $0.value < expirationTime }
+
+        // Get available messages
+        let availableMessages = messages[categoryName]?.filter { !usedMessages.keys.contains($0) } ?? []
+
+        if let newMessage = availableMessages.randomElement() {
+            generatedMessage = newMessage
+            usedMessages[newMessage] = currentTime
+            saveStoredMessages(usedMessages)
+            updateCountdown()
         } else {
-            generatedMessage = "No messages found for this category."
+            generatedMessage = "No new messages available. Try again later!"
         }
+
         rating = nil // Reset rating when a new message is generated
+    }
+
+    // Retrieve stored messages from UserDefaults
+    func getStoredMessages() -> [String: TimeInterval] {
+        if let savedData = UserDefaults.standard.dictionary(forKey: categoryName) as? [String: TimeInterval] {
+            return savedData
+        }
+        return [:]
+    }
+
+    // Save messages to UserDefaults
+    func saveStoredMessages(_ messages: [String: TimeInterval]) {
+        UserDefaults.standard.set(messages, forKey: categoryName)
+    }
+
+    // Updates the countdown to new message generation
+    func updateCountdown() {
+        let storedMessages = getStoredMessages()
+        let currentTime = Date().timeIntervalSince1970
+        let expirationTime = 86400.0 // 24 hours in seconds
+
+        // Find the earliest expiration time of any stored message
+        if let nextReset = storedMessages.values.map({ $0 + expirationTime }).min() {
+            let remainingTime = max(nextReset - currentTime, 0) // Ensure non-negative time
+
+            let hours = Int(remainingTime) / 3600
+            let minutes = (Int(remainingTime) % 3600) / 60
+
+            timeRemaining = String(format: "%02d:%02d", hours, minutes)
+
+            // Refresh every minute
+            DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                updateCountdown()
+            }
+        } else {
+            timeRemaining = "24:00"
+        }
     }
 }
 
 #Preview {
-    CategoryView(categoryName: "Motivation") // Example category
+    CategoryView(categoryName: "Motivation")
 }
