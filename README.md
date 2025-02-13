@@ -33,7 +33,7 @@ Encourage is an app that displays a random positive message of encouragement for
 * User can reset their password if they forgot it.
 * Once logged in, the user can see a welcome message and a list of categories.
 * User can scroll through the categories until the bottom.
-* There will be a tab bar controller to see the home page, mood tracker page, and profile page.
+* There will be a tab bar controller to see the home screen, profile screen, and settings screen.
 * When clicking on each category, there will be a section to generate a message via button.
 * There will also be a section at the bottom to display that message.
 * The user can rate it with a thumbs up or thumbs down.
@@ -41,10 +41,6 @@ Encourage is an app that displays a random positive message of encouragement for
 * If the user wants to go back to a category they have received a message, the message will still be there until the daily limit ends.
 * There will be a daily limit for generating messages.
 * Generating messages will be free.
-* In the mood tracker screen, the user can type how they feel. Users can log in and track how they feel when they receive a message. It can be before or after they receive a message.
-* User can type into a large textbox how they feel, and share how the messages have affected them.
-* It will be private for every user.
-* The textbox will be separated by day.
 * In the profile screen, the user can see the email of their account.
 * The user can reset their password here.
 * The user can also sign out here.
@@ -61,6 +57,10 @@ Encourage is an app that displays a random positive message of encouragement for
 * The user can add a ribbon next to a message to save it as a favorite.
 * The user can see a tab called Favorites to see all their favorite messages.
 * The database will store all generated messages.
+* In the mood tracker screen, the user can type how they feel. Users can log in and track how they feel when they receive a message. It can be before or after they receive a message.
+* User can type into a large textbox how they feel, and share how the messages have affected them.
+* It will be private for every user.
+* The textbox will be separated by day.
 
 ### 2. Screen Archetypes
 
@@ -82,10 +82,6 @@ Encourage is an app that displays a random positive message of encouragement for
 * User can click the button and it will generate a message to be shown at the bottom.
 * For each category, the user can generate a message once per day.
 * The user can go back to the previous screen in the top left.
-- [ ] **Mood Tracker Screen**
-* The user can track how they feel when they receive a message. It can be before or after they receive a message.
-* User can type into a large textbox how they feel, and share how the messages have affected them.
-* It will be separated based on day.
 - [ ] **Profile Screen**
 * User can see the email of the account they are signed in to.
 * User can change their password here.
@@ -97,8 +93,8 @@ Encourage is an app that displays a random positive message of encouragement for
 
 
 - [ ] Home Screen
-- [ ] Mood Tracker Screen
 - [ ] Profile Screen
+- [ ] Settings Screen
 
 **Flow Navigation** (Screen to Screen)
 
@@ -108,7 +104,9 @@ Encourage is an app that displays a random positive message of encouragement for
   * Leads to **Settings Screen**
 - [ ] **Home Screen**
   * Leads to **Category Screen**
-- [ ] **Mood Tracker Screen**
+- [ ] **Profile Screen**
+  * Leads to itself
+- [ ] **Settings Screen**
   * Leads to itself
 - [ ] **Profile Screen**
   * Leads to **Login Screen**
