@@ -21,6 +21,8 @@ struct MainTabView: View {
                     ContentView()
                 case .profileView:
                     ProfileView()
+                case .settingsView:
+                    SettingsView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -55,13 +57,14 @@ struct MainTabView: View {
 }
 
 enum Tab: CaseIterable {
-    case contentView, profileView
+    case contentView, profileView, settingsView
     
     var icon: String {
         // Tab icon
         switch self {
         case .contentView: return "house"
         case .profileView: return "person"
+        case .settingsView: return "gear"
         }
     }
     
@@ -70,6 +73,7 @@ enum Tab: CaseIterable {
         switch self {
         case .contentView: return "Home"
         case .profileView: return "Profile"
+        case .settingsView: return "Settings"
         }
     }
 }
