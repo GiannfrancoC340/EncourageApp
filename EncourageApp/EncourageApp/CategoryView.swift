@@ -22,6 +22,7 @@ struct CategoryView: View {
             "Never give up!",
             "Hard work pays off!",
             "Another Day, Another Opportunity. ― Trae Young",
+            "Try your hardest!",
         ],
         "Mindfulness": [
             "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment. ― Buddha",
