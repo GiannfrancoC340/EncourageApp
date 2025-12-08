@@ -9,8 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var authManager: AuthManager
-    @State private var showAlert = false
-    @State private var alertMessage = ""
     @State private var email: String = ""
     @State private var password: String = ""
 
@@ -62,27 +60,6 @@ struct LoginView: View {
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
                 
-                // Forgot password
-                Button("Forgot Password?") {
-                    if email.isEmpty {
-                        alertMessage = "Please enter your email address first."
-                        showAlert = true
-                    } else {
-                        authManager.resetPassword(email: email) { result in
-                            switch result {
-                            case .success:
-                                alertMessage = "Password reset email sent to \(email)."
-                            case .failure(let error):
-                                alertMessage = error.localizedDescription
-                            }
-                            showAlert = true
-                        }
-                    }
-                }
-                .font(.subheadline)
-                .foregroundColor(.blue)
-                .padding(.top, 15)
-                
                 Spacer()
                 
                 // Navigation to Sign Up
@@ -96,13 +73,6 @@ struct LoginView: View {
                     }
                 }
                 .padding(.bottom, 30)
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("Password Reset"),
-                    message: Text(alertMessage),
-                    dismissButton: .default(Text("OK"))
-                )
             }
         }
     }
