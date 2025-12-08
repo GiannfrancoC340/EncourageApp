@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A683ACE2EE74E2D0039FDDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A683ACD2EE74E2D0039FDDB /* GoogleService-Info.plist */; };
+		4A683AD42EE75D210039FDDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A683AD32EE75D210039FDDB /* GoogleService-Info.plist */; };
 		4AB72C1C2D1366160024BD92 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB72C1B2D1366160024BD92 /* CategoryView.swift */; };
 		4AB72C1E2D1369670024BD92 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB72C1D2D1369670024BD92 /* SettingsView.swift */; };
 		4ABC7E582D125E7500BACA2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4ABC7E572D125E7500BACA2A /* FirebaseAuth */; };
@@ -23,8 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4A683ACD2EE74E2D0039FDDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A683AD22EE758560039FDDB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4A683AD32EE75D210039FDDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AB72C1B2D1366160024BD92 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		4AB72C1D2D1369670024BD92 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 				4ABC7E5F2D12618500BACA2A /* ProfileView.swift */,
 				4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */,
 				4AE3E9A02CE6DCB800952AA8 /* Assets.xcassets */,
-				4A683ACD2EE74E2D0039FDDB /* GoogleService-Info.plist */,
+				4A683AD32EE75D210039FDDB /* GoogleService-Info.plist */,
 				4AE3E9A22CE6DCB800952AA8 /* Preview Content */,
 			);
 			path = EncourageApp;
@@ -168,8 +168,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE3E9A42CE6DCB800952AA8 /* Preview Assets.xcassets in Resources */,
+				4A683AD42EE75D210039FDDB /* GoogleService-Info.plist in Resources */,
 				4AE3E9A12CE6DCB800952AA8 /* Assets.xcassets in Resources */,
-				4A683ACE2EE74E2D0039FDDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
