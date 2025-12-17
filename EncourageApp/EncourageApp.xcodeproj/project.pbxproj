@@ -18,6 +18,7 @@
 		4ABC7E5E2D12609300BACA2A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7E5D2D12609300BACA2A /* LoginView.swift */; };
 		4ABC7E602D12618500BACA2A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7E5F2D12618500BACA2A /* ProfileView.swift */; };
 		4ABC7E622D12638F00BACA2A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC7E612D12638F00BACA2A /* MainTabView.swift */; };
+		4AE1EE282EF36E2100CA3E70 /* CategoryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1EE272EF36E2100CA3E70 /* CategoryStyle.swift */; };
 		4AE3E99D2CE6DCB700952AA8 /* EncourageAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3E99C2CE6DCB700952AA8 /* EncourageAppApp.swift */; };
 		4AE3E99F2CE6DCB700952AA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */; };
 		4AE3E9A12CE6DCB800952AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3E9A02CE6DCB800952AA8 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		4ABC7E5D2D12609300BACA2A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4ABC7E5F2D12618500BACA2A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4ABC7E612D12638F00BACA2A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		4AE1EE272EF36E2100CA3E70 /* CategoryStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStyle.swift; sourceTree = "<group>"; };
 		4AE3E9992CE6DCB700952AA8 /* EncourageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EncourageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE3E99C2CE6DCB700952AA8 /* EncourageAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncourageAppApp.swift; sourceTree = "<group>"; };
 		4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				4ABC7E5D2D12609300BACA2A /* LoginView.swift */,
 				4AE3E99E2CE6DCB700952AA8 /* ContentView.swift */,
 				4AB72C1B2D1366160024BD92 /* CategoryView.swift */,
+				4AE1EE272EF36E2100CA3E70 /* CategoryStyle.swift */,
 				4AB72C1D2D1369670024BD92 /* SettingsView.swift */,
 				4ABC7E5F2D12618500BACA2A /* ProfileView.swift */,
 				4ABC7E5B2D125FE500BACA2A /* AuthManager.swift */,
@@ -188,6 +191,7 @@
 			files = (
 				4AE3E99F2CE6DCB700952AA8 /* ContentView.swift in Sources */,
 				4AB72C1E2D1369670024BD92 /* SettingsView.swift in Sources */,
+				4AE1EE282EF36E2100CA3E70 /* CategoryStyle.swift in Sources */,
 				4AB72C1C2D1366160024BD92 /* CategoryView.swift in Sources */,
 				4ABC7E5C2D125FE500BACA2A /* AuthManager.swift in Sources */,
 				4ABC7E602D12618500BACA2A /* ProfileView.swift in Sources */,
