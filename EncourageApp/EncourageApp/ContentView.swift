@@ -69,6 +69,8 @@ struct CategoryCard: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
                 
                 Spacer()
                 
