@@ -27,7 +27,6 @@ struct ContentView: View {
                 
                 // Scrollable body
                 ScrollView(.vertical) {
-                    // Rounded rectangles
                     VStack(spacing: 14) {
                         // Category 1
                         NavigationLink(destination: CategoryView(categoryName: "Motivation")) {
@@ -127,26 +126,9 @@ struct ContentView: View {
                             }
                         }
                         
-                        // Add more categories here...
                         Spacer()
                         
                     }
-                    
-//                    // Settings Button
-//                    HStack {
-//                        NavigationLink(destination: SettingsView()) {
-//                            ZStack {
-//                                RoundedRectangle(cornerRadius: 10)
-//                                    .fill(Color(.systemGray5)) // Light gray background
-//                                    .frame(width: 50, height: 50) // Adjust size of the rectangle
-//                                Image(systemName: "gearshape.fill") // Gear icon
-//                                    .resizable()
-//                                    .frame(width: 30, height: 30) // Adjust size
-//                                    .foregroundStyle(.gray) // Icon color
-//                                    .padding(10)
-//                            }
-//                        }
-//                    }
                     .padding(.bottom, 40)
                 }
             }
