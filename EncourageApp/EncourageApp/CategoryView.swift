@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct CategoryView: View {
+    @EnvironmentObject var authManager: AuthManager // Access user email
     var categoryName: String // Pass the category name
     @State private var generatedMessage: String = "Tap 'Generate' to get a message!"
     @State private var rating: String? = nil // Track rating ("up", "down", or nil)
     @State private var timeRemaining: String = "24:00" // Time until reset
+    
+    let db = Firestore.firestore() // Firestore instance
+    
     var body: some View {
         VStack(spacing: 20) {
             Text("Category: \(categoryName)")
@@ -47,20 +52,24 @@ struct CategoryView: View {
                     .padding()
 
                 // Rating Buttons (Thumbs Up & Thumbs Down)
-                HStack(spacing: 30) { // Controls spacing between buttons
-                    Button(action: { rating = "up" }) {
+                HStack(spacing: 30) {
+                    Button(action: {
+                        rating = "up"
+                        saveRatingToFirestore(rating: "up")
+                    }) {
                         Image(systemName: "hand.thumbsup.fill")
                             .foregroundColor(rating == "up" ? .green : .gray)
                             .font(.largeTitle)
                     }
-                    //.padding()
 
-                    Button(action: { rating = "down" }) {
+                    Button(action: {
+                        rating = "down"
+                        saveRatingToFirestore(rating: "down")
+                    }) {
                         Image(systemName: "hand.thumbsdown.fill")
                             .foregroundColor(rating == "down" ? .red : .gray)
                             .font(.largeTitle)
                     }
-                    //.padding()
                 }
             }
             
@@ -134,8 +143,45 @@ struct CategoryView: View {
             timeRemaining = "24:00"
         }
     }
+    
+    // MARK: - Firestore Functions
+    
+    /// Saves the user's rating to Firestore
+    func saveRatingToFirestore(rating: String) {
+        guard let userEmail = authManager.userEmail else {
+            print("Error: No user email available")
+            return
+        }
+        
+        // Create a custom document ID using timestamp
+        let timestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        let timestampString = dateFormatter.string(from: timestamp)
+        
+        // Custom document ID: email_category_timestamp
+        let documentID = "\(UUID().uuidString.prefix(8))_\(categoryName)_\(timestampString)"
+        
+        let ratingData: [String: Any] = [
+            "userEmail": userEmail,
+            "category": categoryName,
+            "message": generatedMessage,
+            "rating": rating, // "up" or "down"
+            "timestamp": Timestamp(date: timestamp)
+        ]
+        
+        // Save to Firestore with custom document ID
+        db.collection("ratings").document(documentID).setData(ratingData) { error in
+            if let error = error {
+                print("Error saving rating: \(error.localizedDescription)")
+            } else {
+                print("Rating saved successfully with ID: \(documentID)")
+            }
+        }
+    }
 }
 
 #Preview {
     CategoryView(categoryName: "Motivation")
+        .environmentObject(AuthManager())
 }
