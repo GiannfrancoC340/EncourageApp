@@ -18,13 +18,8 @@ struct EncourageAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if authManager.isSignedIn {
-                MainTabView()
-                    .environmentObject(authManager) // Pass as EnvironmentObject
-            } else {
-                LoginView()
-                    .environmentObject(authManager) // Pass as EnvironmentObject
-            }
+            SplashScreenView()
+                .environmentObject(authManager) // Pass as EnvironmentObject
         }
     }
 }
