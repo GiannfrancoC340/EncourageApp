@@ -71,6 +71,22 @@ struct CategoryView: View {
                             .font(.largeTitle)
                     }
                 }
+                
+                // Favorite Button
+                Button(action: {
+                    saveFavoriteToFirestore()
+                }) {
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                        Text("Favorite this quote")
+                            .fontWeight(.semibold)
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                }
+                .padding(.top, 15)
             }
             
             // Display countdown timer
@@ -146,7 +162,7 @@ struct CategoryView: View {
     
     // MARK: - Firestore Functions
     
-    /// Saves the user's rating to Firestore
+    // Saves the user's rating to Firestore
     func saveRatingToFirestore(rating: String) {
         guard let userEmail = authManager.userEmail else {
             print("Error: No user email available")
@@ -176,6 +192,45 @@ struct CategoryView: View {
                 print("Error saving rating: \(error.localizedDescription)")
             } else {
                 print("Rating saved successfully with ID: \(documentID)")
+            }
+        }
+    }
+    
+    // Saves the current message as a favorite to Firestore
+    func saveFavoriteToFirestore() {
+        guard let userEmail = authManager.userEmail else {
+            print("Error: No user email available")
+            return
+        }
+        
+        // Don't save the default message
+        if generatedMessage == "Tap 'Generate' to get a message!" {
+            print("No message to favorite yet!")
+            return
+        }
+        
+        // Create a custom document ID using timestamp
+        let timestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        let timestampString = dateFormatter.string(from: timestamp)
+        
+        // Custom document ID
+        let documentID = "\(UUID().uuidString.prefix(8))_\(categoryName)_\(timestampString)"
+        
+        let favoriteData: [String: Any] = [
+            "userEmail": userEmail,
+            "category": categoryName,
+            "message": generatedMessage,
+            "timestamp": Timestamp(date: timestamp)
+        ]
+        
+        // Save to Firestore under "favorites" collection
+        db.collection("favorites").document(documentID).setData(favoriteData) { error in
+            if let error = error {
+                print("Error saving favorite: \(error.localizedDescription)")
+            } else {
+                print("Favorite saved successfully with ID: \(documentID)")
             }
         }
     }
