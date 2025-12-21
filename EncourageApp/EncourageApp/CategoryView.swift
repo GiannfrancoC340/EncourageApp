@@ -14,6 +14,7 @@ struct CategoryView: View {
     @State private var generatedMessage: String = "Tap 'Generate' to get a message!"
     @State private var rating: String? = nil // Track rating ("up", "down", or nil)
     @State private var timeRemaining: String = "24:00" // Time until reset
+    @State private var isFavorited: Bool = false // Track if current message is favorited
     
     let db = Firestore.firestore() // Firestore instance
     
@@ -22,7 +23,7 @@ struct CategoryView: View {
             Text("Category: \(categoryName)")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
+                .padding(.top, 2)
             
             // Generate Button
             Button(action: generateMessage) {
@@ -74,12 +75,18 @@ struct CategoryView: View {
                 
                 // Favorite Button
                 Button(action: {
-                    saveFavoriteToFirestore()
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                        isFavorited.toggle()
+                    }
+                    if isFavorited {
+                        saveFavoriteToFirestore()
+                    }
                 }) {
                     HStack {
-                        Image(systemName: "star.fill")
+                        Image(systemName: isFavorited ? "star.fill" : "star")
                             .foregroundColor(.yellow)
-                        Text("Favorite this quote")
+                            .scaleEffect(isFavorited ? 1.2 : 1.0)
+                        Text(isFavorited ? "Favorited!" : "Favorite this quote")
                             .fontWeight(.semibold)
                     }
                     .padding()
@@ -121,6 +128,7 @@ struct CategoryView: View {
         }
 
         rating = nil // Reset rating when a new message is generated
+        isFavorited = false // Reset favorite state when a new message is generated
     }
 
     // Retrieve stored messages from UserDefaults
