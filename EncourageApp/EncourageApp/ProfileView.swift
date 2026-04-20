@@ -11,42 +11,48 @@ struct ProfileView: View {
     @EnvironmentObject var authManager: AuthManager // Use AuthManager to get email
     
     var body: some View {
-        VStack(spacing: 20) {
-            // Title
-            Text("Profile")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
-            
-            // Shows if the user is signed in
+        ScrollView {
             VStack(spacing: 20) {
-                if let email = authManager.user?.email {
-                    Text("Signed in as:")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    
-                    Text(email)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding()
-                } else {
-                    Text("Not signed in")
-                        .font(.title2)
-                        .foregroundColor(.gray)
-                        .padding()
+                // Title
+                Text("Profile")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.top)
+                
+                // Shows if the user is signed in
+                VStack(spacing: 20) {
+                    if let email = authManager.user?.email {
+                        Text("Signed in as:")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        
+                        Text(email)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .padding(.bottom, 10)
+                    } else {
+                        Text("Not signed in")
+                            .font(.title2)
+                            .foregroundColor(.gray)
+                            .padding()
+                    }
                 }
-            }
 
-            // Allows the user to sign out
-            Button("Sign Out") {
-                authManager.signOut()
+                // Allows the user to sign out
+                Button("Sign Out") {
+                    authManager.signOut()
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.bottom, 20)
+                
+                // Message History Section
+                MessageHistoryView()
+                    .padding(.horizontal)
+                
+                Spacer()
             }
-            .buttonStyle(.borderedProminent)
-            .padding(.top, 20)
-            
-            Spacer()
+            .padding(.bottom, 80) // Extra padding for tab bar
         }
-        .padding()
         .navigationTitle("Profile")
     }
 }

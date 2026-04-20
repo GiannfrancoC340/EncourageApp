@@ -123,6 +123,7 @@ struct CategoryView: View {
             usedMessages[newMessage] = currentTime
             saveStoredMessages(usedMessages)
             updateCountdown()
+            saveMessageToHistory(message: newMessage) // Save to Firestore history
         } else {
             generatedMessage = "No new messages available. Try again later!"
         }
@@ -170,7 +171,7 @@ struct CategoryView: View {
     
     // MARK: - Firestore Functions
     
-    // Saves the user's rating to Firestore
+    /// Saves the user's rating to Firestore
     func saveRatingToFirestore(rating: String) {
         guard let userEmail = authManager.userEmail else {
             print("Error: No user email available")
@@ -202,9 +203,49 @@ struct CategoryView: View {
                 print("Rating saved successfully with ID: \(documentID)")
             }
         }
+        
+        // Also update the rating in message history
+        updateMessageHistoryRating(rating: rating)
     }
     
-    // Saves the current message as a favorite to Firestore
+    /// Update the rating for the most recent message in history
+    func updateMessageHistoryRating(rating: String) {
+        guard let userEmail = authManager.userEmail else {
+            return
+        }
+        
+        // Find the most recent message for this user in this category
+        db.collection("messageHistory")
+            .whereField("userEmail", isEqualTo: userEmail)
+            .whereField("category", isEqualTo: categoryName)
+            .whereField("message", isEqualTo: generatedMessage)
+            .order(by: "timestamp", descending: true)
+            .limit(to: 1)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error finding message to update: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let document = snapshot?.documents.first else {
+                    print("No matching message found in history")
+                    return
+                }
+                
+                // Update the rating field
+                self.db.collection("messageHistory").document(document.documentID).updateData([
+                    "rating": rating
+                ]) { error in
+                    if let error = error {
+                        print("Error updating rating in history: \(error.localizedDescription)")
+                    } else {
+                        print("Rating updated in message history")
+                    }
+                }
+            }
+    }
+    
+    /// Saves the current message as a favorite to Firestore
     func saveFavoriteToFirestore() {
         guard let userEmail = authManager.userEmail else {
             print("Error: No user email available")
@@ -239,6 +280,40 @@ struct CategoryView: View {
                 print("Error saving favorite: \(error.localizedDescription)")
             } else {
                 print("Favorite saved successfully with ID: \(documentID)")
+            }
+        }
+    }
+    
+    /// Saves the generated message to message history in Firestore
+    func saveMessageToHistory(message: String) {
+        guard let userEmail = authManager.userEmail else {
+            print("Error: No user email available")
+            return
+        }
+        
+        // Create a custom document ID using timestamp
+        let timestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        let timestampString = dateFormatter.string(from: timestamp)
+        
+        // Custom document ID
+        let documentID = "\(UUID().uuidString.prefix(8))_\(categoryName)_\(timestampString)"
+        
+        let historyData: [String: Any] = [
+            "userEmail": userEmail,
+            "category": categoryName,
+            "message": message,
+            "timestamp": Timestamp(date: timestamp),
+            "rating": NSNull() // Will be updated if user rates it
+        ]
+        
+        // Save to Firestore under "messageHistory" collection
+        db.collection("messageHistory").document(documentID).setData(historyData) { error in
+            if let error = error {
+                print("Error saving message to history: \(error.localizedDescription)")
+            } else {
+                print("Message saved to history with ID: \(documentID)")
             }
         }
     }
