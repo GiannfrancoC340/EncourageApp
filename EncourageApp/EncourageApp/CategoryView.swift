@@ -19,11 +19,12 @@ struct CategoryView: View {
     let db = Firestore.firestore() // Firestore instance
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Category: \(categoryName)")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.top, 2)
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Category: \(categoryName)")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.top, 2)
             
             // Generate Button
             Button(action: generateMessage) {
@@ -51,7 +52,7 @@ struct CategoryView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .padding()
-
+ 
                 // Rating Buttons (Thumbs Up & Thumbs Down)
                 HStack(spacing: 30) {
                     Button(action: {
@@ -62,7 +63,7 @@ struct CategoryView: View {
                             .foregroundColor(rating == "up" ? .green : .gray)
                             .font(.largeTitle)
                     }
-
+ 
                     Button(action: {
                         rating = "down"
                         saveRatingToFirestore(rating: "down")
@@ -94,6 +95,42 @@ struct CategoryView: View {
                     .cornerRadius(10)
                 }
                 .padding(.top, 15)
+                
+                // Copy & Share Buttons
+                HStack(spacing: 15) {
+                    // Copy Button
+                    Button(action: {
+                        copyToClipboard()
+                    }) {
+                        HStack(spacing: 6) {
+                            Text("📋")
+                                .font(.system(size: 18))
+                            Text("Copy")
+                                .fontWeight(.semibold)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                    
+                    // Share Button
+                    Button(action: {
+                        shareMessage()
+                    }) {
+                        HStack(spacing: 6) {
+                            Text("📤")
+                                .font(.system(size: 18))
+                            Text("Share")
+                                .fontWeight(.semibold)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                }
+                .padding(.top, 10)
             }
             
             // Display countdown timer
@@ -101,8 +138,10 @@ struct CategoryView: View {
                 .font(.headline)
                 .foregroundColor(.gray)
                 .padding(.top, 10)
+                .padding(.bottom, 80) // Extra padding for tab bar
         }
         .padding()
+        }
         .onAppear(perform: updateCountdown)
     }
     
@@ -111,13 +150,13 @@ struct CategoryView: View {
         var usedMessages = getStoredMessages()
         let currentTime = Date().timeIntervalSince1970
         let expirationTime = 86400.0 // 24 hours in seconds
-
+ 
         // Remove expired messages
         usedMessages = usedMessages.filter { currentTime - $0.value < expirationTime }
-
+ 
         // Get available messages
         let availableMessages = MessageArrays.messages[categoryName]?.filter { !usedMessages.keys.contains($0) } ?? []
-
+ 
         if let newMessage = availableMessages.randomElement() {
             generatedMessage = newMessage
             usedMessages[newMessage] = currentTime
@@ -127,11 +166,11 @@ struct CategoryView: View {
         } else {
             generatedMessage = "No new messages available. Try again later!"
         }
-
+ 
         rating = nil // Reset rating when a new message is generated
         isFavorited = false // Reset favorite state when a new message is generated
     }
-
+ 
     // Retrieve stored messages from UserDefaults
     func getStoredMessages() -> [String: TimeInterval] {
         if let savedData = UserDefaults.standard.dictionary(forKey: categoryName) as? [String: TimeInterval] {
@@ -139,27 +178,27 @@ struct CategoryView: View {
         }
         return [:]
     }
-
+ 
     // Save messages to UserDefaults
     func saveStoredMessages(_ messages: [String: TimeInterval]) {
         UserDefaults.standard.set(messages, forKey: categoryName)
     }
-
+ 
     // Updates the countdown to new message generation
     func updateCountdown() {
         let storedMessages = getStoredMessages()
         let currentTime = Date().timeIntervalSince1970
         let expirationTime = 86400.0 // 24 hours in seconds
-
+ 
         // Find the earliest expiration time of any stored message
         if let nextReset = storedMessages.values.map({ $0 + expirationTime }).min() {
             let remainingTime = max(nextReset - currentTime, 0) // Ensure non-negative time
-
+ 
             let hours = Int(remainingTime) / 3600
             let minutes = (Int(remainingTime) % 3600) / 60
-
+ 
             timeRemaining = String(format: "%02d:%02d", hours, minutes)
-
+ 
             // Refresh every minute
             DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
                 updateCountdown()
@@ -317,8 +356,60 @@ struct CategoryView: View {
             }
         }
     }
+    
+    // MARK: - Copy & Share Functions
+    
+    /// Copy message to clipboard
+    func copyToClipboard() {
+        // Don't copy the default message
+        if generatedMessage == "Tap 'Generate' to get a message!" {
+            return
+        }
+        
+        // Copy to clipboard silently
+        UIPasteboard.general.string = generatedMessage
+        
+        print("Message copied to clipboard")
+    }
+    
+    /// Share message using iOS share sheet
+    func shareMessage() {
+        // Don't share the default message
+        if generatedMessage == "Tap 'Generate' to get a message!" {
+            return
+        }
+        
+        // Create the share text with category
+        let shareText = "\(generatedMessage)\n\n— \(categoryName) | Encourage App"
+        
+        // Get the window scene
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first,
+              let rootViewController = window.rootViewController else {
+            print("Could not find root view controller")
+            return
+        }
+        
+        // Create activity view controller (share sheet)
+        let activityViewController = UIActivityViewController(
+            activityItems: [shareText],
+            applicationActivities: nil
+        )
+        
+        // For iPad - set popover presentation
+        if let popover = activityViewController.popoverPresentationController {
+            popover.sourceView = window
+            popover.sourceRect = CGRect(x: window.bounds.midX, y: window.bounds.midY, width: 0, height: 0)
+            popover.permittedArrowDirections = []
+        }
+        
+        // Present the share sheet
+        rootViewController.present(activityViewController, animated: true)
+        
+        print("Share sheet presented")
+    }
 }
-
+ 
 #Preview {
     CategoryView(categoryName: "Motivation")
         .environmentObject(AuthManager())
