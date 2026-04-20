@@ -37,7 +37,7 @@ struct ProfileView: View {
                             .padding()
                     }
                 }
-
+ 
                 // Allows the user to sign out
                 Button("Sign Out") {
                     authManager.signOut()
@@ -49,6 +49,11 @@ struct ProfileView: View {
                 MessageHistoryView()
                     .padding(.horizontal)
                 
+                // Statistics Section
+                StatisticsView()
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+                
                 Spacer()
             }
             .padding(.bottom, 80) // Extra padding for tab bar
@@ -56,7 +61,7 @@ struct ProfileView: View {
         .navigationTitle("Profile")
     }
 }
-
+ 
 #Preview {
     ProfileView()
         .environmentObject(AuthManager(isMocked: true)) // Mocked for preview
