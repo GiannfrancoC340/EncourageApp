@@ -45,6 +45,11 @@ struct ProfileView: View {
                 .buttonStyle(.borderedProminent)
                 .padding(.bottom, 20)
                 
+                // Streak Counter Section
+                StreakCounterView()
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                
                 // Message History Section
                 MessageHistoryView()
                     .padding(.horizontal)
