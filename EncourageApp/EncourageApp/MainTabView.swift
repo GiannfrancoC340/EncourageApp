@@ -19,12 +19,12 @@ struct MainTabView: View {
                 switch selectedTab {
                 case .contentView:
                     ContentView()
+                case .statisticsView:
+                    StatisticsTabView()  // NEW
                 case .profileView:
                     ProfileView()
                 case .settingsView:
                     SettingsView()
-                case .favoritesView:
-                    FavoritesView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -59,15 +59,15 @@ struct MainTabView: View {
 }
 
 enum Tab: CaseIterable {
-    case contentView, profileView, settingsView, favoritesView
+    case contentView, statisticsView, profileView, settingsView
     
     var icon: String {
         // Tab icon
         switch self {
         case .contentView: return "house"
+        case .statisticsView: return "chart.bar.fill"
         case .profileView: return "person"
         case .settingsView: return "gear"
-        case .favoritesView: return "star"
         }
     }
     
@@ -75,9 +75,9 @@ enum Tab: CaseIterable {
         // Tab name at the bottom
         switch self {
         case .contentView: return "Home"
+        case .statisticsView: return "Statistics"
         case .profileView: return "Profile"
         case .settingsView: return "Settings"
-        case .favoritesView: return "Favorites"
         }
     }
 }

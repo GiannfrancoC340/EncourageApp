@@ -15,6 +15,7 @@ struct CategoryView: View {
     @State private var rating: String? = nil // Track rating ("up", "down", or nil)
     @State private var timeRemaining: String = "24:00" // Time until reset
     @State private var isFavorited: Bool = false // Track if current message is favorited
+    @State private var showCopiedMessage: Bool = false // Track if "Copied!" message should show
     
     let db = Firestore.firestore() // Firestore instance
     
@@ -103,10 +104,11 @@ struct CategoryView: View {
                         copyToClipboard()
                     }) {
                         HStack(spacing: 6) {
-                            Text("📋")
-                                .font(.system(size: 18))
-                            Text("Copy")
+                            Image(systemName: "doc.on.doc")
+                                .font(.system(size: 16))
+                            Text(showCopiedMessage ? "Copied!" : "Copy")
                                 .fontWeight(.semibold)
+                                .animation(nil, value: showCopiedMessage) // Disable animation on this text
                         }
                         .padding(.horizontal, 20)
                         .padding(.vertical, 12)
@@ -119,8 +121,8 @@ struct CategoryView: View {
                         shareMessage()
                     }) {
                         HStack(spacing: 6) {
-                            Text("📤")
-                                .font(.system(size: 18))
+                            Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 16))
                             Text("Share")
                                 .fontWeight(.semibold)
                         }
@@ -366,8 +368,24 @@ struct CategoryView: View {
             return
         }
         
-        // Copy to clipboard silently
+        // Copy to clipboard
         UIPasteboard.general.string = generatedMessage
+        
+        // Show "Copied!" feedback immediately with NO animation
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            showCopiedMessage = true
+        }
+        
+        // Reset after 2 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            var transaction = Transaction()
+            transaction.disablesAnimations = true
+            withTransaction(transaction) {
+                showCopiedMessage = false
+            }
+        }
         
         print("Message copied to clipboard")
     }
