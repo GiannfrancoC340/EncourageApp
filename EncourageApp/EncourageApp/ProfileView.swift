@@ -59,6 +59,11 @@ struct ProfileView: View {
                     .padding(.horizontal)
                     .padding(.top, 10)
                 
+                // Most-Used Categories Section
+                MostUsedCategoriesView()
+                    .padding(.horizontal)
+                    .padding(.top, 10)
+                
                 Spacer()
             }
             .padding(.bottom, 80) // Extra padding for tab bar
